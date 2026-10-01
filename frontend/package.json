@@ -10,8 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.8.0-rc.3",
+    "@tailwindcss/vite": "^4.3.3",
+    "@tanstack/react-router": "^1.170.38",
+    "@tanstack/react-router-devtools": "^1.167.2",
+    "monaco-editor": "^0.57.0",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.2.8",
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "@types/node": "^24.13.3",
