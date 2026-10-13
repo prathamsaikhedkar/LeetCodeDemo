@@ -2,10 +2,13 @@ import { useState, useRef } from "react";
 import Editor from '@monaco-editor/react';
 import type {OnMount, OnChange, Monaco} from '@monaco-editor/react';
 import type * as monaco from 'monaco-editor';
-import React from 'react'
 import { languages } from "./data/languages";
 
-function CodeEditor() {
+type props = {
+  onSubmit : (code: string) => void
+}
+
+function CodeEditor({onSubmit} : props) {
   const [code, setCode] = useState('Hello');
   const [language, setLanguage] = useState('python')
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
@@ -50,11 +53,7 @@ function CodeEditor() {
   return (
     <div>
       <select onChange={(e) => {setLanguage(e.target.value)}}>
-        {languages.map((language) => (
-          <option key={language.id} value={language.id}>
-            {language.name}
-          </option>
-        ))}
+        {displayLanguages()}
       </select>
       <Editor 
         height={'500px'}
@@ -72,11 +71,13 @@ function CodeEditor() {
             minimap: {enabled: false},
             wordWrap: 'on',
             automaticLayout: true,
-            scrollBeyondLastLine: false
+            scrollBeyondLastLine: false,
+            fontSize: 14
           }
         }
       />
-      <button onClick={handleRunCode} className={'bg-lime-400 rounded-xl h-10 w-50'}>Run Code</button>
+      <button onClick={handleRunCode} className={'bg-lime-400 rounded-xl h-10 w-50 hover:bg-lime-100'}>Run Code</button>
+      <button onClick={() => onSubmit(code)} className={'bg-lime-400 rounded-xl h-10 w-50 hover:bg-lime-100'}>Submit Code</button>
     </div>
   )
 }
