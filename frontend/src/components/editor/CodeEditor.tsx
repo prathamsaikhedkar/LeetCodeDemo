@@ -1,31 +1,23 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import Editor from '@monaco-editor/react';
 import type {OnMount, OnChange, Monaco} from '@monaco-editor/react';
 import type * as monaco from 'monaco-editor';
+import ActionBar from './ActionBar';
 type props = {
-  handleSubmit: () => void
   code: string
   setCode: Dispatch<SetStateAction<string>>
   selectedLanguage: string
-  handleRun: () => void
+  resetCode: () => void
+  handleRunCode: () => void
+  onSubmit: () => void
   isRunning: boolean
   isSubmitting: boolean
 }
 
-function CodeEditor(
-  {
-    handleSubmit, 
-    code, 
-    setCode,
-    selectedLanguage, 
-    handleRun, 
-    isRunning, 
-    isSubmitting
-  } : props) {
-
-//   const [code, setCode] = useState('Hello');
+function CodeEditor({ code, setCode, selectedLanguage, resetCode, handleRunCode, onSubmit, isRunning, isSubmitting }: props) {
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
+  const [fontSize, setFontSize] = useState(14);
 
   const handleEditorDidMount : OnMount = (editor, monacoInstance : Monaco) => {
     editorRef.current = editor;
@@ -37,7 +29,7 @@ function CodeEditor(
         monacoInstance.KeyMod.CtrlCmd | monacoInstance.KeyCode.Enter
       ],
       run: () => {
-        handleRun();
+        handleRunCode();
       }
     })
 
@@ -47,12 +39,48 @@ function CodeEditor(
     setCode(value || '');
   }
 
+  const updateFontSize = (change: number) => {
+    const nextFontSize = Math.min(24, Math.max(10, fontSize + change));
+    setFontSize(nextFontSize);
+    editorRef.current?.updateOptions({ fontSize: nextFontSize });
+  }
+
   return (
-    <div className="editor-container">
-      <Editor 
+    <div className="overflow-hidden">
+      <div className="flex items-center justify-end gap-1 border-b border-slate-700 bg-[#1e1e1e] px-3 py-2">
+        <button
+          className="rounded px-2 py-1 text-xs text-slate-300 hover:bg-slate-700"
+          type="button"
+          onClick={resetCode}
+          disabled={isRunning || isSubmitting}
+          title="Reset code"
+        >
+          Reset
+        </button>
+        <button
+          className="rounded px-2 py-1 text-sm text-slate-300 hover:bg-slate-700 disabled:opacity-50"
+          type="button"
+          onClick={() => updateFontSize(-1)}
+          disabled={fontSize <= 10}
+          title="Zoom out"
+        >
+          A-
+        </button>
+        <span className="w-8 text-center text-xs text-slate-400">{fontSize}</span>
+        <button
+          className="rounded px-2 py-1 text-sm text-slate-300 hover:bg-slate-700 disabled:opacity-50"
+          type="button"
+          onClick={() => updateFontSize(1)}
+          disabled={fontSize >= 24}
+          title="Zoom in"
+        >
+          A+
+        </button>
+      </div>
+      <Editor
         height="460px"
-        defaultLanguage={selectedLanguage === 'c++' ? 'cpp' : selectedLanguage}
-        language={selectedLanguage === 'c++' ? 'cpp' : selectedLanguage}
+        defaultLanguage={selectedLanguage}
+        language={selectedLanguage}
         value={code}
         theme="vs-dark"
         onMount={handleEditorDidMount}
@@ -65,18 +93,11 @@ function CodeEditor(
             wordWrap: 'on',
             automaticLayout: true,
             scrollBeyondLastLine: false,
-            fontSize: 14
+            fontSize
           }
         }
       />
-      <div className="editor-actions">
-        <button className="run-button" type="button" onClick={handleRun} disabled={isRunning || isSubmitting}>
-          {isRunning ? 'Running...' : 'Run'}
-        </button>
-        <button className="submit-button" type="button" onClick={handleSubmit} disabled={isRunning || isSubmitting}>
-          {isSubmitting ? 'Submitting...' : 'Submit'}
-        </button>
-      </div>
+      <ActionBar onRun={handleRunCode} onSubmit={onSubmit} isRunning={isRunning} isSubmitting={isSubmitting} />
     </div>
   )
 }

@@ -18,6 +18,6 @@ export const languages : language[] = [
     },
     {
         id: 4,
-        name: 'c++'
+        name: 'cpp'
     }
 ]

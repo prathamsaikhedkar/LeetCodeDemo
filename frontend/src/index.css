@@ -2,57 +2,8 @@
 
 :root {
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #1f2937;
-  background: #f5f7fa;
   font-synthesis: none;
 }
 
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 320px; }
-button, select, textarea { font: inherit; }
-
-.app-shell { min-height: 100vh; }
-.topbar {
-  align-items: center; background: #fff; border-bottom: 1px solid #e5e7eb;
-  display: flex; justify-content: space-between; padding: 14px 28px;
-}
-.brand { align-items: center; display: flex; font-size: 18px; font-weight: 700; gap: 10px; }
-.brand-mark { align-items: center; background: #f59e0b; border-radius: 6px; color: #fff; display: inline-flex; font-size: 12px; height: 28px; justify-content: center; width: 30px; }
-.difficulty-badge { background: #dcfce7; border-radius: 999px; color: #15803d; font-size: 13px; font-weight: 600; padding: 5px 12px; }
-.workspace { display: grid; gap: 18px; grid-template-columns: minmax(280px, 0.9fr) minmax(420px, 1.1fr); margin: 22px auto; max-width: 1440px; padding: 0 22px; }
-.problem-panel, .coding-panel { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; min-width: 0; padding: 24px; }
-.problem-panel { line-height: 1.65; }
-.problem-panel h1 { font-size: 26px; margin: 4px 0 18px; }
-.problem-panel h2 { border-top: 1px solid #eef0f2; font-size: 17px; margin: 26px 0 12px; padding-top: 18px; }
-.problem-panel p { color: #4b5563; font-size: 15px; }
-.problem-panel code { background: #f1f5f9; border-radius: 3px; color: #111827; padding: 2px 5px; }
-.eyebrow { color: #6b7280 !important; font-size: 12px !important; font-weight: 700; letter-spacing: .08em; margin: 0; text-transform: uppercase; }
-.example { background: #f8fafc; border-radius: 5px; margin: 12px 0; padding: 12px 14px; }
-.example pre { font-size: 13px; margin: 9px 0; white-space: pre-wrap; }
-.example span, .problem-panel li { color: #6b7280; font-size: 13px; }
-.problem-panel ul { padding-left: 20px; }
-.editor-toolbar { align-items: center; display: flex; justify-content: space-between; margin-bottom: 12px; }
-.language-select select { background: #fff; border: 1px solid #d1d5db; border-radius: 5px; color: #111827; cursor: pointer; padding: 7px 28px 7px 10px; }
-.shortcut-hint, .result-muted { color: #9ca3af; font-size: 12px; }
-.editor-container { overflow: hidden; }
-.editor-actions { background: #1e1e1e; display: flex; gap: 8px; justify-content: flex-end; padding: 12px; }
-.editor-actions button, .secondary-button { border: 0; border-radius: 5px; cursor: pointer; font-weight: 600; padding: 8px 16px; }
-.run-button { background: #374151; color: #fff; }
-.submit-button { background: #16a34a; color: #fff; }
-.editor-actions button:disabled, .secondary-button:disabled { cursor: not-allowed; opacity: .55; }
-.result-panel { border-top: 1px solid #e5e7eb; margin-top: 18px; padding-top: 16px; }
-.result-heading { display: flex; justify-content: space-between; margin-bottom: 12px; }
-.result-success { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 5px; color: #166534; display: flex; gap: 12px; padding: 12px; }
-.result-success span { color: #4b5563; font-size: 13px; }
-.result-error { color: #dc2626; }
-.sample-input { margin-top: 18px; }
-.sample-input label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 7px; }
-.sample-input textarea { border: 1px solid #d1d5db; border-radius: 5px; padding: 9px; resize: vertical; width: 100%; }
-.secondary-button { background: #f3f4f6; color: #374151; margin-top: 12px; }
-.sr-only { height: 1px; margin: -1px; overflow: hidden; position: absolute; width: 1px; }
-
-@media (max-width: 800px) {
-  .workspace { grid-template-columns: 1fr; padding: 0 12px; }
-  .topbar { padding: 12px 16px; }
-  .problem-panel, .coding-panel { padding: 16px; }
-}
