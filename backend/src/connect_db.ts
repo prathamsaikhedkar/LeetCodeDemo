@@ -1,7 +1,7 @@
 import "dotenv/config"
 import { drizzle } from "drizzle-orm/node-postgres"
 
-const connect_db: () => ReturnType<typeof drizzle> | null = () => {
+const connect_db = () => {
   try {
     const db = drizzle(process.env.DATABASE_URL!)
     return db
