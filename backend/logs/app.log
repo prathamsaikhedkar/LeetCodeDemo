@@ -1,0 +1,27 @@
+{"level":30,"time":1792495696258,"pid":28644,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":50,"time":1792495942798,"pid":28644,"hostname":"Prathams-PC","msg":"No users found"}
+{"level":50,"time":1792496007829,"pid":28644,"hostname":"Prathams-PC","msg":"Cannot destructure property 'username' of 'req.body' as it is undefined."}
+{"level":50,"time":1792496070773,"pid":28644,"hostname":"Prathams-PC","msg":"No problems found"}
+{"level":30,"time":1792939552493,"pid":27432,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":30,"time":1792940360305,"pid":24136,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":50,"time":1792940618181,"pid":24136,"hostname":"Prathams-PC","msg":"Cannot destructure property 'username' of 'req.body' as it is undefined."}
+{"level":50,"time":1792940659409,"pid":24136,"hostname":"Prathams-PC","msg":"Cannot destructure property 'username' of 'req.body' as it is undefined."}
+{"level":50,"time":1792940765269,"pid":24136,"hostname":"Prathams-PC","msg":"Cannot destructure property 'username' of 'req.body' as it is undefined."}
+{"level":50,"time":1792940872405,"pid":24136,"hostname":"Prathams-PC","msg":"Cannot destructure property 'username' of 'req.body' as it is undefined."}
+{"level":50,"time":1792940888442,"pid":24136,"hostname":"Prathams-PC","msg":"Cannot destructure property 'username' of 'req.body' as it is undefined."}
+{"level":30,"time":1792941767998,"pid":22548,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":50,"time":1792941773018,"pid":22548,"hostname":"Prathams-PC","msg":"Cannot destructure property 'username' of 'req.body' as it is undefined."}
+{"level":50,"time":1792941871079,"pid":22548,"hostname":"Prathams-PC","msg":"Cannot destructure property 'username' of 'req.body' as it is undefined."}
+{"level":50,"time":1792941977057,"pid":22548,"hostname":"Prathams-PC","msg":"Unexpected token ''', \"'{username\"... is not valid JSON"}
+{"level":50,"time":1792942052984,"pid":22548,"hostname":"Prathams-PC","msg":"Unexpected token ''', \"'{username\"... is not valid JSON"}
+{"level":50,"time":1792942099019,"pid":22548,"hostname":"Prathams-PC","msg":"Expected property name or '}' in JSON at position 1 (line 1 column 2)"}
+{"level":30,"time":1792942736962,"pid":26752,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":30,"time":1792943196634,"pid":14824,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":50,"time":1792943307700,"pid":14824,"hostname":"Prathams-PC","msg":"Expected ':' after property name in JSON at position 67 (line 4 column 17)"}
+{"level":50,"time":1792943332583,"pid":14824,"hostname":"Prathams-PC","msg":"examplesToInsert.map is not a function"}
+{"level":50,"time":1792943412843,"pid":14824,"hostname":"Prathams-PC","msg":"examplesToInsert.map is not a function"}
+{"level":30,"time":1792943499704,"pid":27328,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":30,"time":1792943634799,"pid":20212,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":30,"time":1792943807243,"pid":14532,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":30,"time":1792944039550,"pid":10844,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":50,"time":1792944083275,"pid":10844,"hostname":"Prathams-PC","msg":"Failed query: insert into \"examples\" (\"problemId\", \"input\", \"output\") values ($1, $2, $3), ($4, $5, default) returning \"id\", \"problemId\", \"input\", \"output\"\nparams: 10,who,asked,10,p"}

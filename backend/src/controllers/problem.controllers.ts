@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm"
 import { ApiResponse, ApiError } from "../utils/api_formats.js"
 import type { Request, Response } from "express"
 
-const db = await connect_db()
+const db = connect_db()
 
 if (!db) {
   throw new Error("Database connection failed")
@@ -13,8 +13,8 @@ if (!db) {
 export const getAllProblems = async (req: Request, res: Response) => {
   const problems = await db.select().from(Problems)
 
-  if (!problems) {
-    return res.status(404).json(new ApiError(404, "No problems found"))
+  if (problems.length === 0) {
+    throw new ApiError(404, "No problems found")
   }
 
   return res
@@ -30,8 +30,8 @@ export const getProblemById = async (req: Request, res: Response) => {
     .from(Problems)
     .where(eq(Problems.id, parseInt(id as string)))
 
-  if (!problem) {
-    return res.status(404).json(new ApiError(404, "Problem not found"))
+  if (problem.length === 0) {
+    throw new ApiError(404, "Problem not found")
   }
 
   return res

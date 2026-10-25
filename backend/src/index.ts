@@ -1,15 +1,14 @@
-import connect_db from "./connect_db.js"
 import "dotenv/config"
-import { drizzle } from "drizzle-orm/node-postgres"
-import { eq } from "drizzle-orm"
-import { Users } from "./db/schema.js"
-import { ApiResponse, ApiError } from "./utils/api_formats.js"
 import express from "express"
 import type { Request, Response, NextFunction } from "express"
 import cors from "cors"
-import {rateLimit} from "express-rate-limit"
+import { rateLimit } from "express-rate-limit"
 import pino from "pino"
 import morgan from "morgan"
+import { ApiError } from "./utils/api_formats.js"
+import userRoutes from "./routes/user.routes.js"
+import problemRoutes from "./routes/problem.routes.js"
+import adminRoutes from './routes/admin.routes.js'
 
 const app = express()
 
@@ -39,49 +38,11 @@ logger.info("Application started")
 const fileLogger = pino(pino.destination({dest: './logs/app.log', sync: false}))
 fileLogger.info("Application started and logging to file")
 
-// configure morgan
-morgan(':method :url :status :res[content-length] - :response-time ms')
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 
-async function main() {
-  const db = connect_db()
-
-  if (db === null) {
-    console.error("Failed to connect to the database.")
-    process.exit(1)
-  }
-
-  const user: typeof Users.$inferInsert = {
-    username: "John",
-    age: 30
-  }
-
-  await db.insert(Users).values(user)
-  console.log("New user created!")
-
-  const users = await db.select().from(Users)
-  console.log("Getting all users from the database: ", users)
-  /*
-  const users: {
-    id: number;
-    name: string;
-    age: number;
-    email: string;
-  }[]
-  */
-
-  await db
-    .update(Users)
-    .set({
-      age: 31,
-    })
-    .where(eq(Users.username, user.username))
-  console.log("User info updated!")
-
-  await db.delete(Users).where(eq(Users.username, user.username))
-  console.log("User deleted!")
-}
-
-main()
+app.use("/users", userRoutes)
+app.use("/problems", problemRoutes)
+app.use('/admin', adminRoutes)
 
 app.get("/health", (req, res) => {
   res.status(200).send("OK")
@@ -90,7 +51,8 @@ app.get("/health", (req, res) => {
 app.use((err: ApiError | Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack)
   const status = (err instanceof ApiError) ? err.status : 500
-  res.status(status).json(new ApiError(status, err.message))
+  fileLogger.error(err.message)
+  return res.status(status).json(new ApiError(status, err.message))
 })
 
 const PORT = process.env.PORT || 3000

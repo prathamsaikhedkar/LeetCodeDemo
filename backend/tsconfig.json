@@ -4,6 +4,8 @@
     // File Layout
     "rootDir": "",
     "outDir": "./dist",
+    // "include": ["src"],
+    
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
