@@ -9,6 +9,7 @@ import { ApiError } from "./utils/api_formats.js"
 import userRoutes from "./routes/user.routes.js"
 import problemRoutes from "./routes/problem.routes.js"
 import adminRoutes from './routes/admin.routes.js'
+import submissionRoutes from './routes/submission.routes.js'
 
 const app = express()
 
@@ -43,6 +44,7 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 app.use("/users", userRoutes)
 app.use("/problems", problemRoutes)
 app.use('/admin', adminRoutes)
+app.use("/submissions", submissionRoutes)
 
 app.get("/health", (req, res) => {
   res.status(200).send("OK")

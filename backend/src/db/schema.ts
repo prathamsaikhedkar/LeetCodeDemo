@@ -24,8 +24,14 @@ export const Problems = t.pgTable("problems", {
   id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
   title: t.varchar({ length: 255 }).notNull(),
   description: t.varchar({ length: 1000 }).notNull(),
-  difficulty: t.varchar({ length: 50 }).notNull(),
-  solution: t.varchar({ length: 1000 }).notNull(),
+  difficulty: t.varchar({ length: 50 }).notNull()
+})
+
+export const Solutions = t.pgTable("solutions", {
+  id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
+  problemId: t.integer().notNull().references(() => Problems.id),
+  solutionText: t.varchar({ length: 1000 }).notNull(),
+  code: t.varchar().notNull(),
 })
 
 export const Examples = t.pgTable("examples", {
