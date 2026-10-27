@@ -10,6 +10,7 @@ export const Users = t.pgTable("users", {
 export const Accounts = t.pgTable("accounts", {
   id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
   userId: t.integer().notNull().references(() => Users.id),
+  password: t.varchar({ length: 255 }).notNull(),
   refresh_token: t.varchar({ length: 255 }),
   access_token: t.varchar({ length: 255 }),
   expires_at: t.integer(),

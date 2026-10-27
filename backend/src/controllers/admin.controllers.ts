@@ -4,15 +4,19 @@ import { eq } from "drizzle-orm"
 import { ApiResponse, ApiError } from "../utils/api_formats.js"
 import type { Request, Response } from "express"
 
+const db = connect_db()
+
+if (!db) {
+  throw new Error("Database connection failed")
+}
+
 export const createProblem = async(req: Request, res: Response) => {
     const {title, description, testCases, difficulty, solution, problemExamples} = req.body
 
     const examplesToInsert = Array.from(problemExamples || testCases)
     console.log(examplesToInsert);    
 
-    const db = connect_db()
-
-    const problem = await db.insert(Problems).values({title, description,difficulty, solution}).returning()
+    const problem = await db.insert(Problems).values({title, description,difficulty}).returning()
     if (problem.length === 0 || !problem[0]) {
         throw new ApiError(500, "failed to create problem")
     }

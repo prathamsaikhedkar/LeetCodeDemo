@@ -1,4 +1,4 @@
-import "dotenv/config"
+import config from "./utils/config.js"
 import { drizzle } from "drizzle-orm/node-postgres"
 import { ApiError } from "./utils/api_formats.js"
 
@@ -9,7 +9,7 @@ const connect_db = () => {
   if (db) return db
 
   try {
-    db = drizzle(process.env.DATABASE_URL!)
+    db = drizzle(config.DATABASE_URL!)
     return db
   } catch (error) {
     console.log("Error connecting to database")
