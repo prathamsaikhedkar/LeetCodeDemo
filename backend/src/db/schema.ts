@@ -42,6 +42,13 @@ export const Examples = t.pgTable("examples", {
   output: t.varchar().notNull(),
 })
 
+export const Testcases = t.pgTable("testcases", {
+  id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
+  problemId: t.integer().notNull().references(() => Problems.id),
+  input: t.varchar().notNull(),
+  expectedOutput: t.varchar().notNull(),
+})
+
 export const Submissions = t.pgTable("submissions", {
   id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
   userId: t.integer().notNull().references(() => Users.id),
@@ -64,12 +71,17 @@ const userRelations = defineRelations({Users, Accounts}, (r) => ({
 
 ))
 
-const problemRelations = defineRelations({Problems, Examples, Submissions}, (r) => ({
+const problemRelations = defineRelations({Problems, Examples, Submissions, Testcases}, (r) => ({
   Problems: {
     examples: r.many.Examples({
       from: r.Problems.id,
       to: r.Examples.problemId,
       alias: 'problem_examples'
+    }),
+    testcases: r.many.Testcases({
+      from: r.Problems.id,
+      to: r.Testcases.problemId,
+      alias: 'problem_testcases'
     }),
     submissions: r.many.Submissions({
       from: r.Problems.id,
