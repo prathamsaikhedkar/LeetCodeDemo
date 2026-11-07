@@ -3,6 +3,8 @@ import connect_db from "../connect_db.js"
 import { eq } from "drizzle-orm"
 import { ApiResponse, ApiError } from "../utils/api_formats.js"
 import type { Request, Response } from "express"
+import { z } from "zod"
+import { submitCodeExecution, getExecutionResult, executionResponseSchema, executionRequestSchema } from "./execution.controllers.js"
 
 const db = connect_db()
 
@@ -11,14 +13,31 @@ if (!db) {
 }
 
 export const createSubmission = async (req: Request, res: Response) => {
-  const { problemId, userId, sourceCode } = req.body
+  const { problemId, userId, sourceCode, languageId } = req.body
 
-  // submit code
-  const status = "accepted"
+  if (!problemId || !userId || !sourceCode || !languageId) {
+    throw new ApiError(400, "problemId, userId, sourceCode, and languageId are required")
+  }
+  const {token} : z.infer<typeof executionRequestSchema> = await submitCodeExecution(sourceCode, languageId)
 
+  const response : z.infer<typeof executionResponseSchema> = await getExecutionResult(token, ["stdout", "time", "memory", "stderr", "compile_output", "message", "status"])
+
+  if (!response || !response.status) {
+    throw new ApiError(500, "Invalid response from execution service")
+  }
+  
   const submission = await db
     .insert(Submissions)
-    .values({ userId, problemId, code: sourceCode, status })
+    .values({
+      userId: Number(userId),
+      problemId,
+      code: sourceCode,
+      status: response.status.description,
+      stdout: response.stdout ?? "",
+      timeTaken: response.time ?? 0,
+      memoryUsed: response.memory ?? 0,
+      stderr: response.stderr ?? "",
+    })
     .returning()
   if (submission.length == 0) {
     throw new ApiError(500, "could not create submission")

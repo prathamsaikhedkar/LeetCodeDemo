@@ -55,6 +55,10 @@ export const Submissions = t.pgTable("submissions", {
   problemId: t.integer().notNull().references(() => Problems.id),
   code: t.varchar().notNull(),
   submittedAt: t.timestamp().notNull().defaultNow(),
+  timeTaken: t.integer().notNull(),
+  memoryUsed: t.integer().notNull(),
+  stdout: t.varchar().default(""),
+  stderr: t.varchar().default(""),
   status: t.varchar({ length: 50 }).notNull(),
 })
 

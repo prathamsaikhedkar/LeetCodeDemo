@@ -25,3 +25,9 @@
 {"level":30,"time":1792943807243,"pid":14532,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
 {"level":30,"time":1792944039550,"pid":10844,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
 {"level":50,"time":1792944083275,"pid":10844,"hostname":"Prathams-PC","msg":"Failed query: insert into \"examples\" (\"problemId\", \"input\", \"output\") values ($1, $2, $3), ($4, $5, default) returning \"id\", \"problemId\", \"input\", \"output\"\nparams: 10,who,asked,10,p"}
+{"level":30,"time":1794057650735,"pid":4496,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":30,"time":1794057860994,"pid":5152,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":30,"time":1794057907275,"pid":17184,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":30,"time":1794058088334,"pid":16064,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":30,"time":1794058179793,"pid":6584,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":30,"time":1794058218318,"pid":6860,"hostname":"Prathams-PC","msg":"Application started and logging to file"}

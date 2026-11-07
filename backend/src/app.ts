@@ -29,6 +29,13 @@ const limiter = rateLimit({
   max: 100, 
   standardHeaders: true, 
   legacyHeaders: false,
+  message: "Too many requests from this IP, please try again later.",
+  skip: (req: Request, res: Response) => {
+    if (req.path === "/health" || process.env.NODE_ENV === "test") {
+      return true
+    }
+    return false
+  }
 })
 
 app.use(limiter)
@@ -36,10 +43,10 @@ app.use(limiter)
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 
-app.use("/users", userRoutes)
-app.use("/problems", problemRoutes)
-app.use('/admin', adminRoutes)
-app.use("/submissions", submissionRoutes)
+app.use("/api/users", userRoutes)
+app.use("/api/problems", problemRoutes)
+app.use("/api/admin", adminRoutes)
+app.use("/api/submissions", submissionRoutes)
 
 app.get("/health", (req: Request, res: Response) => {
   res.status(200).json(new ApiResponse(200, "Server is healthy"))
