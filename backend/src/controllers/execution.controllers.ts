@@ -5,7 +5,7 @@ import { z } from "zod"
 
 export const executionResponseSchema = z.object({
   stdout: z.string().nullable().optional(),
-  time: z.string().nullable().optional(),
+  time: z.number().nullable().optional(),
   memory: z.number().nullable().optional(),
   stderr: z.string().nullable().optional(),
   token: z.string().nullable().optional(),

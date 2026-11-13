@@ -59,9 +59,9 @@ describe("API Endpoints Suite", () => {
   })
 
   
-  describe("GET /users", () => {
+  describe("GET /api/users", () => {
     it("should respond with a structured ApiResponse or 404 when empty", async () => {
-      const response = await request.get("/users")
+      const response = await request.get("/api/users")
 
       // If database is populated, status is 200; if empty, controller returns 404
       assert.ok(

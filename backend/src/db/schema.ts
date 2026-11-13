@@ -28,6 +28,29 @@ export const Problems = t.pgTable("problems", {
   difficulty: t.varchar({ length: 50 }).notNull()
 })
 
+export const Lessons = t.pgTable("lessons", {
+  id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
+  title: t.varchar({ length: 255 }).notNull(),
+  topic: t.varchar({ length: 255 }).notNull(),
+  content: t.varchar({ length: 1000 }).notNull(),
+})
+
+export const Modules = t.pgTable("modules", {
+  id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
+  title: t.varchar({ length: 255 }).notNull(),
+  description: t.varchar({ length: 1000 }).notNull(),
+  problems: t.integer().array().notNull(),
+  lessons: t.integer().array().notNull(),
+  timelineId: t.integer().notNull()
+})
+
+export const Timelines = t.pgTable("timelines", {
+  id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
+  moduleId: t.integer().notNull().references(() => Modules.id),
+  // a non user specific timeline linked to a module, which contains a list of problem ids and lesson ids in the order they should be completed
+  items: t.json().notNull()
+})
+
 export const Solutions = t.pgTable("solutions", {
   id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
   problemId: t.integer().notNull().references(() => Problems.id),
@@ -112,3 +135,22 @@ const submissionRelations = defineRelations({Submissions, Users, Problems}, (r) 
   }
 }))
 
+const moduleRelations = defineRelations({Modules, Problems, Lessons, Timelines}, (r) => ({
+  Modules: {
+    moduleProblems: r.many.Problems({
+      from: r.Modules.problems,
+      to: r.Problems.id,
+      alias: 'module_problems'
+    }),
+    moduleLessons: r.many.Lessons({
+      from: r.Modules.lessons,
+      to: r.Lessons.id,
+      alias: 'module_lessons'
+    }),
+    timelines: r.one.Timelines({
+      from: r.Modules.timelineId,
+      to: r.Timelines.id,
+      alias: 'module_timelines'
+    })
+  }
+}))

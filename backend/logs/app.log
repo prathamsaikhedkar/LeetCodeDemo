@@ -31,3 +31,26 @@
 {"level":30,"time":1794058088334,"pid":16064,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
 {"level":30,"time":1794058179793,"pid":6584,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
 {"level":30,"time":1794058218318,"pid":6860,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":30,"time":1794498964063,"pid":27116,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":30,"time":1794583467234,"pid":29344,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":30,"time":1794585552239,"pid":2532,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":30,"time":1794585552917,"pid":1404,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":30,"time":1794585553461,"pid":7224,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":30,"time":1794586129786,"pid":14468,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":50,"time":1794586130593,"pid":14468,"hostname":"Prathams-PC","msg":"Problem not found"}
+{"level":50,"time":1794586130688,"pid":14468,"hostname":"Prathams-PC","msg":"Failed query: insert into \"problems\" (\"title\", \"description\", \"difficulty\") values ($1, $2, $3) returning \"id\", \"title\", \"description\", \"difficulty\"\nparams: Test Problem: Add Two Numbers,Given two integers a and b, return their sum.,Easy"}
+{"level":30,"time":1794586130215,"pid":13804,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":50,"time":1794586130744,"pid":13804,"hostname":"Prathams-PC","msg":"Converting circular structure to JSON\n    --> starting at object with constructor 'PgInteger'\n    |     property 'table' -> object with constructor 'PgTable'\n    --- property 'id' closes the circle"}
+{"level":30,"time":1794586131068,"pid":23628,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":30,"time":1794586681960,"pid":13352,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":50,"time":1794586682520,"pid":13352,"hostname":"Prathams-PC","msg":"Problem not found"}
+{"level":50,"time":1794586682586,"pid":13352,"hostname":"Prathams-PC","msg":"Failed query: insert into \"problems\" (\"title\", \"description\", \"difficulty\") values ($1, $2, $3) returning \"id\", \"title\", \"description\", \"difficulty\"\nparams: Test Problem: Add Two Numbers,Given two integers a and b, return their sum.,Easy"}
+{"level":30,"time":1794586682629,"pid":5860,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":50,"time":1794586683292,"pid":5860,"hostname":"Prathams-PC","msg":"Failed query: select \"id\", \"userId\", \"problemId\", \"code\", \"submittedAt\", \"timeTaken\", \"memoryUsed\", \"stdout\", \"stderr\", \"status\" from \"submissions\" where \"submissions\".\"id\" = $1\nparams: 99999999"}
+{"level":30,"time":1794586683109,"pid":28100,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":30,"time":1794586926943,"pid":23928,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":50,"time":1794586927609,"pid":23928,"hostname":"Prathams-PC","msg":"Problem not found"}
+{"level":50,"time":1794586927701,"pid":23928,"hostname":"Prathams-PC","msg":"Failed query: insert into \"problems\" (\"title\", \"description\", \"difficulty\") values ($1, $2, $3) returning \"id\", \"title\", \"description\", \"difficulty\"\nparams: Test Problem: Add Two Numbers,Given two integers a and b, return their sum.,Easy"}
+{"level":30,"time":1794586927847,"pid":12728,"hostname":"Prathams-PC","msg":"Application started and logging to file"}
+{"level":50,"time":1794586928519,"pid":12728,"hostname":"Prathams-PC","msg":"Failed query: select \"id\", \"userId\", \"problemId\", \"code\", \"submittedAt\", \"timeTaken\", \"memoryUsed\", \"stdout\", \"stderr\", \"status\" from \"submissions\" where \"submissions\".\"id\" = $1\nparams: 99999999"}
+{"level":30,"time":1794586928101,"pid":20756,"hostname":"Prathams-PC","msg":"Application started and logging to file"}

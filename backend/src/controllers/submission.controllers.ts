@@ -12,8 +12,15 @@ if (!db) {
   throw new Error("Database connection failed")
 }
 
+type SubmissionBody = {
+  problemId: number
+  userId: number
+  sourceCode: string
+  languageId: number
+}
+
 export const createSubmission = async (req: Request, res: Response) => {
-  const { problemId, userId, sourceCode, languageId } = req.body
+  const { problemId, userId, sourceCode, languageId }: SubmissionBody = req.body
 
   if (!problemId || !userId || !sourceCode || !languageId) {
     throw new ApiError(400, "problemId, userId, sourceCode, and languageId are required")
@@ -30,7 +37,7 @@ export const createSubmission = async (req: Request, res: Response) => {
     .insert(Submissions)
     .values({
       userId: Number(userId),
-      problemId,
+      problemId: Number(problemId),
       code: sourceCode,
       status: response.status.description,
       stdout: response.stdout ?? "",
@@ -51,12 +58,12 @@ export const createSubmission = async (req: Request, res: Response) => {
 export const getSubmissionById = async (req: Request, res: Response) => {
   const { id } = req.params
 
-  const submission = db
+  const submission = await db
     .select()
     .from(Submissions)
     .where(eq(Submissions.id, Number(id)))
 
-  if (!submission) {
+  if (!submission || submission.length === 0) {
     throw new ApiError(404, "submission not found")
   }
 
@@ -72,12 +79,12 @@ export const getSubmissionsByUser = async (req: Request, res: Response) => {
     throw new ApiError(400, "invalid userId")
   }
 
-  const submissions = db
+  const submissions = await db
     .select()
     .from(Submissions)
     .where(eq(Submissions.userId, Number(userId)))
 
-  if (!submissions) {
+  if (!submissions || submissions.length === 0) {
     throw new ApiError(404, "submissions not found")
   }
 
